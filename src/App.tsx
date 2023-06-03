@@ -1,73 +1,58 @@
-import { stagger, useAnimate, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { Avaibility, Colors, Music, Team, Todo } from "./features/cards";
-import { useFeatureStore } from "./features/store";
-import { MusicVisual, OtherVisual } from "./features/visual";
+import { stagger, useAnimate, useInView } from 'framer-motion'
+import { useEffect, useRef } from 'react'
+import { Avaibility, Colors, Music, Team, Todo } from './features/cards'
+import { useFeatureStore } from './features/store'
+import { MusicVisual, OtherVisual } from './features/visual'
 
 function App() {
-    const [scope, animate] = useAnimate();
-    const inFullScreen = useFeatureStore((state) => state.inFullScreen);
-    const lastFullScreen = useFeatureStore((state) => state.lastFullScreen);
-    const setInFullScreen = useFeatureStore((state) => state.setInFullScreen);
+    const [scope, animate] = useAnimate()
+    const inFullScreen = useFeatureStore((state) => state.inFullScreen)
+    const lastFullScreen = useFeatureStore((state) => state.lastFullScreen)
+    const setInFullScreen = useFeatureStore((state) => state.setInFullScreen)
 
     useEffect(() => {
         if (inFullScreen) {
             animate([
                 [
-                    ".title",
-                    { opacity: 0, x: "-200px" },
+                    '.title',
+                    { opacity: 0, x: '-200px' },
                     { duration: 0.3, delay: stagger(0.05) },
                 ],
                 [
                     `.visual-${inFullScreen}`,
-                    { opacity: 1, scale: 1, pointerEvents: "auto" },
-                    { at: "<" },
+                    { opacity: 1, scale: 1, pointerEvents: 'auto' },
+                    { at: '<' },
                 ],
                 [
-                    ".active-card .gradient",
+                    '.active-card .gradient',
                     { opacity: 0, scale: 0, y: -100, x: 100 },
-                    { at: "<" },
+                    { at: '<' },
                 ],
-                [
-                    ".active-card .show-me-btn",
-                    { opacity: 0 },
-                    { at: "<" },
-                ],
-                [
-                    ".close-btn",
-                    { opacity: 1, y: "0px" },
-                    { at: "<" },
-                ],
-            ]);
+                ['.active-card .show-me-btn', { opacity: 0 }, { at: '<' }],
+                ['.close-btn', { opacity: 1, y: '0px' }, { at: '<' }],
+            ])
         } else {
             animate([
                 [
-                    ".title",
-                    { opacity: 1, x: "0px" },
+                    '.title',
+                    { opacity: 1, x: '0px' },
                     { duration: 0.3, delay: stagger(0.05) },
                 ],
                 [
                     `.visual-${lastFullScreen}`,
-                    { opacity: 0, scale: 0.75, pointerEvents: "none" },
-                    { at: "<" },
+                    { opacity: 0, scale: 0.75, pointerEvents: 'none' },
+                    { at: '<' },
                 ],
                 [
-                    ".active-card .gradient",
+                    '.active-card .gradient',
                     { opacity: 1, scale: 1, y: 0, x: 0 },
-                    { at: "<" },
+                    { at: '<' },
                 ],
-                [
-                    ".close-btn",
-                    { opacity: 0, y: "300px" },
-                    { at: "<" },
-                ],
-                [
-                    ".active-card .show-me-btn",
-                    { opacity: 1 },
-                ],
-            ]);
+                ['.close-btn', { opacity: 0, y: '300px' }, { at: '<' }],
+                ['.active-card .show-me-btn', { opacity: 1 }],
+            ])
         }
-    }, [inFullScreen, animate]);
+    }, [inFullScreen, animate, lastFullScreen])
     return (
         <main className="mx-auto max-w-5xl px-4">
             <HeroSection />
@@ -79,7 +64,7 @@ function App() {
 
                     <button
                         onClick={() => {
-                            setInFullScreen(null);
+                            setInFullScreen(null)
                         }}
                         className="bg-black close-btn px-4 py-2 text-white fixed -translate-x-1/2 bottom-5 rounded-xl left-1/2"
                     >
@@ -89,7 +74,7 @@ function App() {
                 <FeatureSection />
             </section>
         </main>
-    );
+    )
 }
 
 function HeroSection() {
@@ -106,7 +91,7 @@ function HeroSection() {
             </h1>
             <article className="aspect-[16/9] h-64 rounded-xl mt-10 bg-black" />
         </section>
-    );
+    )
 }
 
 const FeatureSection = () => {
@@ -127,73 +112,74 @@ const FeatureSection = () => {
                 </div>
             </article>
         </section>
-    );
-};
+    )
+}
 
 type FeatureTitleProps = {
-    feature: (typeof features)[0];
-};
+    feature: (typeof features)[0]
+}
 
 const FeatureTitle = ({ feature }: FeatureTitleProps) => {
-    const ref = useRef<HTMLParagraphElement>(null);
+    const ref = useRef<HTMLParagraphElement>(null)
     const isInView = useInView(ref, {
-        margin: "-50% 0px -50% 0px",
-    });
+        margin: '-50% 0px -50% 0px',
+    })
 
-    const setInViewFeature = useFeatureStore((state) => state.setInViewFeature);
-    const inViewFeature = useFeatureStore((state) => state.inViewFeauture);
+    const setInViewFeature = useFeatureStore((state) => state.setInViewFeature)
+    const inViewFeature = useFeatureStore((state) => state.inViewFeauture)
 
     useEffect(() => {
         if (isInView) {
-            setInViewFeature(feature.id);
+            setInViewFeature(feature.id)
         }
         if (isInView && inViewFeature == feature.id) {
-            setInViewFeature(null);
+            setInViewFeature(null)
         }
-    }, [isInView]);
+    }, [isInView])
 
     return (
         <p
             ref={ref}
-            className={`text-4xl title transition-colors duration-300 ${isInView ? "text-black" : "text-gray-300 "
-                } py-16 font-bold`}
+            className={`text-4xl title transition-colors duration-300 ${
+                isInView ? 'text-black' : 'text-gray-300 '
+            } py-16 font-bold`}
         >
             {feature.title}
         </p>
-    );
-};
+    )
+}
 
 const features = [
     {
-        title: "Use your calendar as a todo list",
-        id: "todo-list",
+        title: 'Use your calendar as a todo list',
+        id: 'todo-list',
         card: Todo,
         visual: OtherVisual,
     },
     {
-        title: "Color your calendar to organize",
-        id: "colors",
+        title: 'Color your calendar to organize',
+        id: 'colors',
         card: Colors,
         visual: OtherVisual,
     },
     {
-        title: "Instantly know if someone is available",
-        id: "availability",
+        title: 'Instantly know if someone is available',
+        id: 'availability',
         card: Avaibility,
         visual: OtherVisual,
     },
     {
-        title: "Track what you listened to when",
-        id: "music",
+        title: 'Track what you listened to when',
+        id: 'music',
         card: Music,
         visual: MusicVisual,
     },
 
     {
-        title: "Always know what your team is up to",
-        id: "team",
+        title: 'Always know what your team is up to',
+        id: 'team',
         card: Team,
         visual: OtherVisual,
     },
-];
-export default App;
+]
+export default App

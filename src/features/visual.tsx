@@ -1,26 +1,25 @@
-import clsx from "clsx";
-import { useFeatureStore } from "./store";
-import { motion } from "framer-motion";
+import clsx from 'clsx'
+import { motion } from 'framer-motion'
 
 type VisualProps = {
-    children: React.ReactNode;
-} & VisualCard;
+    children: React.ReactNode
+} & VisualCard
 
 type VisualCard = {
-    id: string;
-};
+    id: string
+}
 
 function VisualWrapper({ children, id }: VisualProps) {
     return (
         <div
             className={clsx(
-                "fixed inset-0 opacity-0 pointer-events-none p-4 duration-300  mx-auto max-w-5xl grid place-content-center",
-                `visual-${id}`,
+                'fixed inset-0 opacity-0 pointer-events-none p-4 duration-300  mx-auto max-w-5xl grid place-content-center',
+                `visual-${id}`
             )}
         >
             {children}
         </div>
-    );
+    )
 }
 
 export const MusicVisual = ({ id }: VisualCard) => {
@@ -44,13 +43,13 @@ export const MusicVisual = ({ id }: VisualCard) => {
                 </svg>
             </motion.div>
         </VisualWrapper>
-    );
-};
+    )
+}
 
 export const OtherVisual = ({ id }: VisualCard) => {
     return (
         <VisualWrapper id={id}>
             <img src="window-spotify.webp" alt="fullscreen" />
         </VisualWrapper>
-    );
-};
+    )
+}
