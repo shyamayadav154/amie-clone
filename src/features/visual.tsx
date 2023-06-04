@@ -1,25 +1,27 @@
-import clsx from 'clsx'
-import { motion } from 'framer-motion'
+import clsx from "clsx";
+import { motion } from "framer-motion";
 
 type VisualProps = {
-    children: React.ReactNode
-} & VisualCard
+    children: React.ReactNode;
+} & VisualCard;
 
 type VisualCard = {
-    id: string
-}
+    id: string;
+};
 
 function VisualWrapper({ children, id }: VisualProps) {
     return (
         <div
             className={clsx(
-                'fixed inset-0 opacity-0 pointer-events-none p-4 duration-300  mx-auto max-w-5xl grid place-content-center',
-                `visual-${id}`
+                "fixed inset-0 opacity-0 pointer-events-none p-4 duration-300  flex items-center justify-center",
+                `visual-${id}`,
             )}
         >
-            {children}
+            <div className="max-w-5xl relative px-4">
+                {children}
+            </div>
         </div>
-    )
+    );
 }
 
 export const MusicVisual = ({ id }: VisualCard) => {
@@ -28,12 +30,12 @@ export const MusicVisual = ({ id }: VisualCard) => {
             <img
                 src="window-spotify.webp"
                 alt="fullscreen"
-                className="object-contain overflow-hidden rounded-3xl"
+                className=""
             />
             <motion.div
                 layoutId="music"
                 id="music"
-                className="h-44 rounded-full absolute top-1/2 left-[62%] p-[1px]  w-2.5 bg-green-400"
+                className="h-44 rounded-full absolute top-1/2 left-[61.5%] p-[1px]  w-2.5 bg-green-400"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                     <path
@@ -43,13 +45,13 @@ export const MusicVisual = ({ id }: VisualCard) => {
                 </svg>
             </motion.div>
         </VisualWrapper>
-    )
-}
+    );
+};
 
 export const OtherVisual = ({ id }: VisualCard) => {
     return (
         <VisualWrapper id={id}>
             <img src="window-spotify.webp" alt="fullscreen" />
         </VisualWrapper>
-    )
-}
+    );
+};

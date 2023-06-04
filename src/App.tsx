@@ -49,7 +49,7 @@ function App() {
                 ],
                 [
                     `.visual-${lastFullScreen}`,
-                    { opacity: 0, scale: 0.75, pointerEvents: "none" },
+                    { opacity: 0, scale: 0.8, pointerEvents: "none" },
                     { at: "<" },
                 ],
                 [
