@@ -141,10 +141,10 @@ const FeatureTitle = ({ feature }: FeatureTitleProps) => {
         if (isInView) {
             setInViewFeature(feature.id);
         }
-        if (isInView && inViewFeature == feature.id) {
+        if (!isInView && inViewFeature === feature.id) {
             setInViewFeature(null);
         }
-    }, [isInView]);
+    }, [isInView, setInViewFeature, inViewFeature, feature?.id]);
 
     return (
         <p
