@@ -1,32 +1,32 @@
-import clsx from 'clsx'
-import { motion } from 'framer-motion'
-import { useFeatureStore } from './store'
+import clsx from "clsx";
+import { motion } from "framer-motion";
+import { useFeatureStore } from "./store";
 
 type CardProps = {
-    id: string
-}
+    id: string;
+};
 
 type FeatureCardProps = {
-    gradient: string
-    children: React.ReactNode
-} & CardProps
+    gradient: string;
+    children: React.ReactNode;
+} & CardProps;
 
 const FeatureCard = ({ children, gradient, id }: FeatureCardProps) => {
-    const inViewFeature = useFeatureStore((state) => state.inViewFeauture)
-    const setInFullScreen = useFeatureStore((state) => state.setInFullScreen)
+    const inViewFeature = useFeatureStore((state) => state.inViewFeauture);
+    const setInFullScreen = useFeatureStore((state) => state.setInFullScreen);
     return (
         <div
             className={clsx(
-                'w-full absolute h-full rounded-3xl transition-opacity overflow-hidden',
+                "w-full absolute h-full rounded-3xl transition-opacity overflow-hidden",
                 inViewFeature === id
-                    ? 'opacity-100  active-card'
-                    : 'opacity-0 pointer-events-none'
+                    ? "opacity-100  active-card"
+                    : "opacity-0 pointer-events-none",
             )}
         >
             <div
                 className={clsx(
-                    'gradient  bg-gradient-to-br absolute inset-0 origin-bottom-left',
-                    gradient
+                    "gradient  bg-gradient-to-br absolute inset-0 origin-bottom-left",
+                    gradient,
                 )}
             />
             {children}
@@ -37,46 +37,46 @@ const FeatureCard = ({ children, gradient, id }: FeatureCardProps) => {
                 Show me
             </button>
         </div>
-    )
-}
+    );
+};
 
 export const Team = ({ id }: CardProps) => {
     return (
         <FeatureCard id={id} gradient="from-blue-400/10 to-blue-400">
             <span />
         </FeatureCard>
-    )
-}
+    );
+};
 
 export const Todo = ({ id }: CardProps) => {
     return (
         <FeatureCard id={id} gradient="from-blue-400/10 to-blue-400">
             <span />
         </FeatureCard>
-    )
-}
+    );
+};
 
 export const Colors = ({ id }: CardProps) => {
     return (
         <FeatureCard id={id} gradient="from-red-400/10 to-red-400">
             <span />
         </FeatureCard>
-    )
-}
+    );
+};
 export const Avaibility = ({ id }: CardProps) => {
     return (
         <FeatureCard id={id} gradient="from-amber-400/10 to-amber-400">
             <span />
         </FeatureCard>
-    )
-}
+    );
+};
 export const Music = ({ id }: CardProps) => {
-    const inFulScreen = useFeatureStore((store) => store.inFullScreen)
-    const isFullScreen = inFulScreen == id
+    const inFulScreen = useFeatureStore((store) => store.inFullScreen);
+    const isFullScreen = inFulScreen == id;
     console.log({
         inFulScreen,
         isFullScreen,
-    })
+    });
 
     return (
         <FeatureCard id={id} gradient="from-green-300/10 to-green-300">
@@ -84,30 +84,30 @@ export const Music = ({ id }: CardProps) => {
                 src="bgSong1.webp"
                 alt="music"
                 className={clsx(
-                    'absolute left-[10%]  top-[10%] rounded-xl duration-300 shadow-lg w-[20%]',
-                    isFullScreen ? 'scale-0' : 'scale-100'
+                    "absolute left-[10%]  top-[10%] rounded-xl duration-300 shadow-lg w-[20%]",
+                    isFullScreen ? "scale-0" : "scale-100",
                 )}
             />
             <img
                 src="bgSong2.webp"
                 alt="music"
                 className={clsx(
-                    'absolute right-[10%] top-[30%] rounded-xl duration-300 shadow-lg w-[20%]',
-                    isFullScreen ? 'scale-0' : 'scale-100'
+                    "absolute right-[10%] top-[30%] rounded-xl duration-300 shadow-lg w-[20%]",
+                    isFullScreen ? "scale-0" : "scale-100",
                 )}
             />
             <img
                 src="bgSong3.webp"
                 alt="music"
                 className={clsx(
-                    'absolute left-[20%] bottom-[10%] rounded-xl duration-300 shadow-lg w-[20%]',
-                    isFullScreen ? 'scale-0' : 'scale-100'
+                    "absolute left-[20%] bottom-[10%] rounded-xl duration-300 shadow-lg w-[30%]",
+                    isFullScreen ? "scale-0" : "scale-100",
                 )}
             />
             {!isFullScreen && (
                 <motion.div
                     layoutId="music"
-                    className="absolute bg-[#1bd761] left-[40%] p-2 top-32 w-20 h-40 rounded-[95px] shadow-lg"
+                    className="absolute bg-[#1bd761] left-[42%] p-2 top-32 w-16 h-32 rounded-[95px] shadow-xl"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                         <path
@@ -118,5 +118,5 @@ export const Music = ({ id }: CardProps) => {
                 </motion.div>
             )}
         </FeatureCard>
-    )
-}
+    );
+};

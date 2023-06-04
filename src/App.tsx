@@ -38,7 +38,7 @@ function App() {
                     { at: "<" },
                 ],
                 [".active-card .show-me-btn", { opacity: 0 }, { at: "<" }],
-                [".close-btn", { opacity: 1, y: "0px" }, { at: "<" }],
+                [".back-to-site", { opacity: 1, y: "0px" }, { at: "<", duration: 0.3 }],
             ]);
         } else {
             animate([
@@ -57,7 +57,10 @@ function App() {
                     { opacity: 1, scale: 1, y: 0, x: 0 },
                     { at: "<" },
                 ],
-                [".close-btn", { opacity: 0, y: "300px" }, { at: "<" }],
+                [".back-to-site", { opacity: 0, y: "300px" }, {
+                    at: "<",
+                    duration: 0.3,
+                }],
                 [".active-card .show-me-btn", { opacity: 1 }],
             ]);
         }
@@ -75,9 +78,9 @@ function App() {
                         onClick={() => {
                             setInFullScreen(null);
                         }}
-                        className="bg-black close-btn px-4 py-2 text-white fixed -translate-x-1/2 bottom-5 rounded-xl left-1/2"
+                        className="bg-black  font-medium z-10 back-to-site px-4 py-2 text-white fixed -translate-x-1/2 bottom-5 rounded-xl opacity-0 left-1/2"
                     >
-                        Close
+                        Back to site
                     </button>
                 </article>
                 <FeatureSection />
